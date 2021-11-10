@@ -27,7 +27,7 @@ window.onload = function(){
     citybutton.addEventListener("click", function(){
         var country = document.getElementById("country").value;
 
-        if (!city){
+        if (!country){
             query = 'world.php'
         }
         else{
