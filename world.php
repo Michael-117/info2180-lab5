@@ -1,11 +1,24 @@
 <?php
 $host = 'localhost';
 $username = 'lab5_user';
-$password = '';
+$password = 'password123';
 $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-$stmt = $conn->query("SELECT * FROM countries");
+
+if (empty($_GET['country']) && empty($_GET['context'])){
+  $stmt = $conn->query("SELECT * FROM countries");
+}
+elseif (isset($_GET['country']) && empty($_GET['context'])){
+  $query = "SELECT * FROM countries WHERE name like '%".$_GET['country']."%'";
+  echo $query;
+  $stmt = $conn->query($query);
+}
+elseif (isset($_GET['country']) && isset($_GET['context'])){
+  $query = "SELECT * FROM countries WHERE name like '%".$_GET['country']."%'";
+  echo $query;
+  $stmt = $conn->query($query);
+}
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
